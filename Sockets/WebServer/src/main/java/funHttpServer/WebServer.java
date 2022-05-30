@@ -205,6 +205,12 @@ class WebServer {
           Integer num1 = Integer.parseInt(query_pairs.get("num1"));
           Integer num2 = Integer.parseInt(query_pairs.get("num2"));
 
+          //Add in error handling here
+           //check if either is negative
+           //check if either are 0
+           //check if the number is too big?
+           //if those are yes, give client error (4xx)
+           
           // do math
           Integer result = num1 * num2;
 
