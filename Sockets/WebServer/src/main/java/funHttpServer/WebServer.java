@@ -205,11 +205,18 @@ class WebServer {
           Integer num1 = Integer.parseInt(query_pairs.get("num1"));
           Integer num2 = Integer.parseInt(query_pairs.get("num2"));
 
-          //Add in error handling here
-           //check if either is negative
-           //check if either are 0
-           //check if the number is too big?
-           //if those are yes, give client error (4xx)
+          //check if value is in range
+          if (num1 < 1 || num1 > 100) {
+             builder.append("HTTP/1.1 400 Bad Request\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("Integer 1 not in range 1-100: " + num1);
+          } else if (num2 < 1 || num2 > 100) {
+             builder.append("HTTP/1.1 400 Bad Request\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("Integer 2 not in range 1-100: " + num2);
+          }
            
           // do math
           Integer result = num1 * num2;
