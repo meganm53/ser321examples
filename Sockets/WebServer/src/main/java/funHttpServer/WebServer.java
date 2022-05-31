@@ -210,12 +210,12 @@ class WebServer {
             builder.append("HTTP/1.1 400 Bad Request\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Integer 1 not in range 1-100: " + num1);
+            builder.append("Provided integer 1 not in range 1-100: " + num1  + " ");
           } else if (num2 < 1 || num2 > 100) {
             builder.append("HTTP/1.1 400 Bad Request\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Integer 2 not in range 1-100: " + num2);
+            builder.append("Provided integer 2 not in range 1-100: " + num2 + " ");
           }
 
           // do math
@@ -272,19 +272,37 @@ class WebServer {
           int color2 = Integer.parseInt(query_pairs.get("color2"));
 
           // find which color it makes
-          if(color1 == 1 && color2 == 2){
+          if (color1 == 1 && color2 == 2) {
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
             builder.append("Result is: Orange");
-          } else if(color1 == 1 && color2 == 3){
+          } else if(color1 == 2 && color2 == 1){
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: Orange");
+          }else if(color1 == 1 && color2 == 3){
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: Purple");
+          }else if(color1 == 3 && color2 == 1){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
             builder.append("Result is: Purple");
           } else if(color1 == 3 && color2 == 2){
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: Green");
+          } else if(color1 == 2 && color2 == 3){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
@@ -350,12 +368,12 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("You guessed the correct number " + int_rand);
+            builder.append("You guessed the correct number " + int_rand + "!");
           }else{
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("You did not guess the correct number " + int_rand);
+            builder.append("You did not guess the correct number " + int_rand + " :(");
           }
         } else {
           // if the request is not recognized at all
