@@ -277,11 +277,15 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
+            builder.append("Colors red and yellow:");
+            builder.append("\n");
             builder.append("Result is: Orange");
           } else if(color1 == 2 && color2 == 1){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Colors yellow and red:");
             builder.append("\n");
             builder.append("Result is: Orange");
           }else if(color1 == 1 && color2 == 3){
@@ -289,11 +293,15 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
+            builder.append("Colors red and blue:");
+            builder.append("\n");
             builder.append("Result is: Purple");
           }else if(color1 == 3 && color2 == 1){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Colors blue and red:");
             builder.append("\n");
             builder.append("Result is: Purple");
           } else if(color1 == 3 && color2 == 2){
@@ -301,11 +309,15 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
+            builder.append("Colors blue and yellow:");
+            builder.append("\n");
             builder.append("Result is: Green");
           } else if(color1 == 2 && color2 == 3){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Colors yellow and blue:");
             builder.append("\n");
             builder.append("Result is: Green");
           } else if(color1 == 1 && color2 == 1){
@@ -313,11 +325,15 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
+            builder.append("Colors red and red:");
+            builder.append("\n");
             builder.append("Result is: Red");
           } else if(color1 == 2 && color2 == 2){
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Colors yellow and yellow:");
             builder.append("\n");
             builder.append("Result is: Yellow");
           } else if(color1 == 3 && color2 == 3){
@@ -325,7 +341,9 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Result is: Orange");
+            builder.append("Colors blue and blue:");
+            builder.append("\n");
+            builder.append("Result is: Blue");
           } else {
             builder.append("HTTP/1.1 400 Bad Request\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
@@ -350,12 +368,12 @@ class WebServer {
             builder.append("HTTP/1.1 400 Bad Request\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Integer 1 not in range 0-20: " + num1);
+            builder.append("Provided integer 1 not in range 0-20: " + num1 + " ");
           } else if (num2 < 0 || num2 > 20) {
             builder.append("HTTP/1.1 400 Bad Request\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Integer 2 not in range 0-20: " + num2);
+            builder.append("Provided integer 2 not in range 0-20: " + num2 + " ");
           }
 
           // calculate a random number
