@@ -194,140 +194,173 @@ class WebServer {
             builder.append("File not found: " + file);
           }
         } else if (request.contains("multiply?")) {
-          // This multiplies two numbers, there is NO error handling, so when
-          // wrong data is given this just crashes
+            // This multiplies two numbers, there is NO error handling, so when
+            // wrong data is given this just crashes
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
-          // extract path parameters
-          query_pairs = splitQuery(request.replace("multiply?", ""));
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+            // extract path parameters
+            query_pairs = splitQuery(request.replace("multiply?", ""));
 
-          // extract required fields from parameters
-          Integer num1 = Integer.parseInt(query_pairs.get("num1"));
-          Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+            // extract required fields from parameters
+            Integer num1 = Integer.parseInt(query_pairs.get("num1"));
+            Integer num2 = Integer.parseInt(query_pairs.get("num2"));
 
-          //check if value is in range
-          if (num1 < 1 || num1 > 100) {
-             builder.append("HTTP/1.1 400 Bad Request\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("Integer 1 not in range 1-100: " + num1);
-          } else if (num2 < 1 || num2 > 100) {
-             builder.append("HTTP/1.1 400 Bad Request\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("Integer 2 not in range 1-100: " + num2);
-          }
-           
-          // do math
-          Integer result = num1 * num2;
+            //check if value is in range
+            if (num1 < 1 || num1 > 100) {
+              builder.append("HTTP/1.1 400 Bad Request\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Integer 1 not in range 1-100: " + num1);
+            } else if (num2 < 1 || num2 > 100) {
+              builder.append("HTTP/1.1 400 Bad Request\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Integer 2 not in range 1-100: " + num2);
+            }
 
-          // Generate response
-          builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("Result is: " + result);
+            // do math
+            Integer result = num1 * num2;
 
-          // TODO: Include error handling here with a correct error code and
-          // a response that makes sense
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Result is: " + result);
 
-        } else if (request.contains("github?")) {
-          // pulls the query from the request and runs it with GitHub's REST API
-          // check out https://docs.github.com/rest/reference/
-          //
-          // HINT: REST is organized by nesting topics. Figure out the biggest one first,
-          //     then drill down to what you care about
-          // "Owner's repo is named RepoName. Example: find RepoName's contributors" translates to
-          //     "/repos/OWNERNAME/REPONAME/contributors"
+            // TODO: Include error handling here with a correct error code and
+            // a response that makes sense
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
-          query_pairs = splitQuery(request.replace("github?", ""));
-          String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
-          System.out.println(json);
-          
-          Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
-          
-          // typecasting obj to JSONObject
-          JSONObject jo = (JSONObject) obj;
-          String fullName = (String) jo.get("name");
-          String authorName = (String) jo.get("login");
-          String repoId = (String) jo.get("id");
+          } else if (request.contains("github?")) {
+            // pulls the query from the request and runs it with GitHub's REST API
+            // check out https://docs.github.com/rest/reference/
+            //
+            // HINT: REST is organized by nesting topics. Figure out the biggest one first,
+            //     then drill down to what you care about
+            // "Owner's repo is named RepoName. Example: find RepoName's contributors" translates to
+            //     "/repos/OWNERNAME/REPONAME/contributors"
 
-          builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("Name, login, id: " + fullName, authorName, repoId);
-          // TODO: Parse the JSON returned by your fetch and create an appropriate
-          // response based on what the assignment document asks for
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+            query_pairs = splitQuery(request.replace("github?", ""));
+            String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
+            System.out.println(json);
 
-        } else if (request.contains("commonl?")) {
-          // This multiplies two numbers, there is NO error handling, so when
-          // wrong data is given this just crashes
+            Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
-          // extract path parameters
-          query_pairs = splitQuery(request.replace("commonl?", ""));
+            // typecasting obj to JSONObject
+            JSONObject jo = (JSONObject) obj;
+            String fullName = (String) jo.get("name");
+            String authorName = (String) jo.get("login");
+            String repoId = (String) jo.get("id");
 
-          // extract required fields from parameters
-          String word1 = String.parseString(query_pairs.get("word1"));
-          String word2 = String.parseString(query_pairs.get("word2"));
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Name, login, id: " + fullName, authorName, repoId);
+            // TODO: Parse the JSON returned by your fetch and create an appropriate
+            // response based on what the assignment document asks for
 
-          //for loop to 
-           
-          // do math
-          Integer result = num1 * num2;
+          } else if (request.contains("combo?")) {
+            // This multiplies two numbers, there is NO error handling, so when
+            // wrong data is given this just crashes
 
-          // Generate response
-          builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("Result is: " + result);
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+            // extract path parameters
+            query_pairs = splitQuery(request.replace("combo?", ""));
 
-        } else if (request.contains("guessNumbers?")) {
-          // This multiplies two numbers, there is NO error handling, so when
-          // wrong data is given this just crashes
+            // extract required fields from parameters
+            int color1 = Integer.parseInt(query_pairs.get("color1"));
+            int color2 = Integer.parseInt(query_pairs.get("color2"));
+            
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
-          // extract path parameters
-          query_pairs = splitQuery(request.replace("guessNumbers?", ""));
+            // find which color it makes
+            if(color1 == 1 && color2 == 2){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Orange");
+            } else if(color1 == 1 && color2 == 3){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Purple");
+            } else if(color1 == 3 && color2 == 2){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Green");
+            } else if(color1 == 1 && color2 == 1){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Red");
+            } else if(color1 == 2 && color2 == 2){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Yellow");
+            } else if(color1 == 3 && color2 == 3){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: Orange");
+            } else {
+              builder.append("HTTP/1.1 400 Bad Request\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Color option Not valid.");
+            }
+            
 
-          // extract required fields from parameters
-          Integer num1 = Integer.parseInt(query_pairs.get("num1"));
-          Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+          } else if (request.contains("guessNumbers?")) {
+            // This multiplies two numbers, there is NO error handling, so when
+            // wrong data is given this just crashes
 
-          //check if value is in range
-          if (num1 < 0 || num1 > 20) {
-             builder.append("HTTP/1.1 400 Bad Request\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("Integer 1 not in range 0-20: " + num1);
-          } else if (num2 < 0 || num2 > 20) {
-             builder.append("HTTP/1.1 400 Bad Request\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("Integer 2 not in range 0-20: " + num2);
-          }
-           
-          // calculate a random number
-          Random randNum = new Random();
-          int upperBound = 20;
-          int int_rand = randNum.nextInt(upperBound);
-          
-          if(int_rand == num1 || int_rand){
-             // Generate response
-             builder.append("HTTP/1.1 200 OK\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("You guessed the correct number " + int_rand);
-          }else{
-             builder.append("HTTP/1.1 200 OK\n");
-             builder.append("Content-Type: text/html; charset=utf-8\n");
-             builder.append("\n");
-             builder.append("You did not guess the correct number " + int_rand);
-          }
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+            // extract path parameters
+            query_pairs = splitQuery(request.replace("guessNumbers?", ""));
 
-        }else {
+            // extract required fields from parameters
+            Integer num1 = Integer.parseInt(query_pairs.get("num1"));
+            Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+
+            //check if value is in range
+            if (num1 < 0 || num1 > 20) {
+              builder.append("HTTP/1.1 400 Bad Request\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Integer 1 not in range 0-20: " + num1);
+            } else if (num2 < 0 || num2 > 20) {
+              builder.append("HTTP/1.1 400 Bad Request\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Integer 2 not in range 0-20: " + num2);
+            }
+
+            // calculate a random number
+            Random randNum = new Random();
+            int upperBound = 20;
+            int int_rand = randNum.nextInt(upperBound);
+
+            if(int_rand == num1 || int_rand == num2){
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("You guessed the correct number " + int_rand);
+            }else{
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("You did not guess the correct number " + int_rand);
+            }
+          } else {
           // if the request is not recognized at all
-
           builder.append("HTTP/1.1 400 Bad Request\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
