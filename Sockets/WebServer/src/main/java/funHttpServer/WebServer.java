@@ -243,15 +243,89 @@ class WebServer {
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
+          
+          Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
+          
+          // typecasting obj to JSONObject
+          JSONObject jo = (JSONObject) obj;
+          String fullName = (String) jo.get("name");
+          String authorName = (String) jo.get("login");
+          String repoId = (String) jo.get("id");
 
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append("Check the todos mentioned in the Java source file");
+          builder.append("Name, login, id: " + fullName, authorName, repoId);
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response based on what the assignment document asks for
 
-        } else {
+        } else if (request.contains("commonl?")) {
+          // This multiplies two numbers, there is NO error handling, so when
+          // wrong data is given this just crashes
+
+          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+          // extract path parameters
+          query_pairs = splitQuery(request.replace("commonl?", ""));
+
+          // extract required fields from parameters
+          String word1 = String.parseString(query_pairs.get("word1"));
+          String word2 = String.parseString(query_pairs.get("word2"));
+
+          //for loop to 
+           
+          // do math
+          Integer result = num1 * num2;
+
+          // Generate response
+          builder.append("HTTP/1.1 200 OK\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+          builder.append("Result is: " + result);
+
+        } else if (request.contains("guessNumbers?")) {
+          // This multiplies two numbers, there is NO error handling, so when
+          // wrong data is given this just crashes
+
+          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+          // extract path parameters
+          query_pairs = splitQuery(request.replace("guessNumbers?", ""));
+
+          // extract required fields from parameters
+          Integer num1 = Integer.parseInt(query_pairs.get("num1"));
+          Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+
+          //check if value is in range
+          if (num1 < 0 || num1 > 20) {
+             builder.append("HTTP/1.1 400 Bad Request\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("Integer 1 not in range 0-20: " + num1);
+          } else if (num2 < 0 || num2 > 20) {
+             builder.append("HTTP/1.1 400 Bad Request\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("Integer 2 not in range 0-20: " + num2);
+          }
+           
+          // calculate a random number
+          Random randNum = new Random();
+          int upperBound = 20;
+          int int_rand = randNum.nextInt(upperBound);
+          
+          if(int_rand == num1 || int_rand){
+             // Generate response
+             builder.append("HTTP/1.1 200 OK\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("You guessed the correct number " + int_rand);
+          }else{
+             builder.append("HTTP/1.1 200 OK\n");
+             builder.append("Content-Type: text/html; charset=utf-8\n");
+             builder.append("\n");
+             builder.append("You did not guess the correct number " + int_rand);
+          }
+
+        }else {
           // if the request is not recognized at all
 
           builder.append("HTTP/1.1 400 Bad Request\n");
