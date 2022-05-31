@@ -270,7 +270,11 @@ class WebServer {
             // extract required fields from parameters
             int color1 = Integer.parseInt(query_pairs.get("color1"));
             int color2 = Integer.parseInt(query_pairs.get("color2"));
+<<<<<<< Updated upstream
             
+=======
+
+>>>>>>> Stashed changes
 
             // find which color it makes
             if(color1 == 1 && color2 == 2){
@@ -315,7 +319,11 @@ class WebServer {
               builder.append("\n");
               builder.append("Color option Not valid.");
             }
+<<<<<<< Updated upstream
             
+=======
+
+>>>>>>> Stashed changes
 
           } else if (request.contains("guessNumbers?")) {
             // This multiplies two numbers, there is NO error handling, so when
