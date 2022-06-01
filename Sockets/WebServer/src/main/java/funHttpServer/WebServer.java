@@ -252,13 +252,18 @@ class WebServer {
           String authorName = (String) jo.get("login");
           String repoId = (String) jo.get("id");
 */
+          
+          Integer id = Integer.parseInt(query_pairs.get("id"));
+          String name = query_pairs.get("name");
+          String fullName = query_pairs.get("full_name");
+
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append(json + "\n"); //show url
-          builder.append("Name, login, id: " /*+ fullName, authorName, repoId*/);
-          // TODO: Parse the JSON returned by your fetch and create an appropriate
-          // response based on what the assignment document asks for
+          builder.append("id: " + id + " name: " + name + "full name: " + fullName);
+
+          //ADD IN ERROR HANDLING
+
 
         } else if (request.contains("combo?")) {
           // This multiplies two numbers, there is NO error handling, so when
