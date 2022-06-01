@@ -25,20 +25,6 @@ import java.util.Random;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.nio.charset.Charset;
-import java.io.IOException;
-import org.json.*;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.JSONObject;
-
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 
 class WebServer {
   public static void main(String args[]) {
@@ -257,16 +243,16 @@ class WebServer {
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
-          /*
-          Object obj = new JSONParser().parse(json);
+/*
+          Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
 
           // typecasting obj to JSONObject
           JSONObject jo = (JSONObject) obj;
           String fullName = (String) jo.get("name");
           String authorName = (String) jo.get("login");
           String repoId = (String) jo.get("id");
-          */
-
+*/
+          
           Integer id = Integer.parseInt(query_pairs.get("id"));
           String name = query_pairs.get("name");
           String fullName = query_pairs.get("full_name");
